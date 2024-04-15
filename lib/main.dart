@@ -101,10 +101,16 @@ class _AnimalListPageState extends State<AnimalListPage> {
                       // 下のイメージリストで持つ
                       Image.network(animals[index]),
                       Text(animalName[index],
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(animalInfo[index],
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,),
                     ],
