@@ -31,23 +31,23 @@ class AnimalListPage extends StatefulWidget {
 // 最初のページ
 class _AnimalListPageState extends State<AnimalListPage> {
   // 連想配列で作る
-  List<String> animal1=[
-    'https://x.gd/3rg9B',
-    'シベリアン・ハスキー',
-    '団体でそりを引く作業犬だったこともあり、複数で飼育すると個性が出て、それぞれの中で暗黙の役割分担ができたりするので、興味がつきません。もちろん単独飼育でも、心を許した飼い主には、実に陽気で人なつこくて従順です。もともとがなんとかなるさといった楽天的な性格なので、苦しいことやつらい現実には目をそらして、早く忘れてしまおうとするところがあります。そのため、訓練やしつけにはかなりてこずります。「迷子になると家に帰れないほど頭が悪い」などと言われますが、実はそうではなく、苦労して家に帰るよりも、居心地のいい所を見つけて「ここもなかなかいいな」と、居候を決め込んで住み着いてしまうためで、これも執着心のない楽天的な性格の表れのようです。',
-    'イヌ - 大型',
-    'アメリカ',
-    '54～60cm'
-  ];
-  List<String> animal2=[
-    'https://x.gd/VcGAa',
-    'アラスカン・マラミュート',
-    'オオカミを連想させる精悍な容姿に似合わず、平和主義で物静かな愛情溢れる従順な犬です。人が大好きで、特に一度信頼した主人には、ひたすら献身的に尽くします。とても忍耐強いので、子どもの遊び相手もできますし、また長時間の留守番にもじっとがまんして耐えてくれます。でも実はとても甘えん坊なので、帰って来たらめいっぱいほめてあげましょう。感情表現がとても豊かです。',
-    'イヌ - 大型',
-    'アメリカ（アラスカ地方）',
-    '58～71cm'
-  ];
-  late List<List<String>> animals= [animal1,animal2];
+  Map<String,dynamic> animal1= {
+    'image': 'https://x.gd/3rg9B',
+    'name':'シベリアン・ハスキー',
+    'info':'団体でそりを引く作業犬だったこともあり、複数で飼育すると個性が出て、それぞれの中で暗黙の役割分担ができたりするので、興味がつきません。もちろん単独飼育でも、心を許した飼い主には、実に陽気で人なつこくて従順です。もともとがなんとかなるさといった楽天的な性格なので、苦しいことやつらい現実には目をそらして、早く忘れてしまおうとするところがあります。そのため、訓練やしつけにはかなりてこずります。「迷子になると家に帰れないほど頭が悪い」などと言われますが、実はそうではなく、苦労して家に帰るよりも、居心地のいい所を見つけて「ここもなかなかいいな」と、居候を決め込んで住み着いてしまうためで、これも執着心のない楽天的な性格の表れのようです。',
+    'type':'イヌ - 大型',
+    'from':'アメリカ',
+    'height':'54～60cm',
+  };
+  Map<String,dynamic> animal2= {
+    'image': 'https://x.gd/VcGAa',
+    'name': 'アラスカン・マラミュート',
+    'info': 'オオカミを連想させる精悍な容姿に似合わず、平和主義で物静かな愛情溢れる従順な犬です。人が大好きで、特に一度信頼した主人には、ひたすら献身的に尽くします。とても忍耐強いので、子どもの遊び相手もできますし、また長時間の留守番にもじっとがまんして耐えてくれます。でも実はとても甘えん坊なので、帰って来たらめいっぱいほめてあげましょう。感情表現がとても豊かです。',
+    'type':'イヌ - 大型',
+    'from':'アメリカ（アラスカ地方）',
+    'height':'58～71cm',
+  };
+  late List<Map<String,dynamic>> animals= [animal1,animal2];
 
 
   // 動物画像
@@ -68,7 +68,7 @@ class _AnimalListPageState extends State<AnimalListPage> {
   // // 全長
   // final List<String> animalLength=['54～60cm','58～71cm','61～69cm','56cm以上','65～80cm'];
 
-  Widget _buildAnimalColum(List<String> animal,BuildContext  context){
+  Widget _buildAnimalColum(Map<String,dynamic> animal,BuildContext  context){
     return InkWell(
       onTap: (){
         // // 画面遷移
@@ -77,7 +77,7 @@ class _AnimalListPageState extends State<AnimalListPage> {
           // 遷移先(動物の詳細ページ)
           MaterialPageRoute(
               builder: (context){
-                return AnimalDetailPage(animal);
+                return AnimalDetailPage(animal:animal);
               },
               //   フルスクリーンで表示するかどうかの設定
               fullscreenDialog: true
@@ -89,15 +89,15 @@ class _AnimalListPageState extends State<AnimalListPage> {
         child: Column(
           children: [
             // 下のイメージリストで持つ
-            Image.network(animal[0]),
-            Text(animal[1],
+            Image.network(animal['image']),
+            Text(animal['name'],
               style: TextStyle(
                 fontSize: 16,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            Text(animal[2],
+            Text(animal['info'],
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -143,7 +143,7 @@ class _AnimalListPageState extends State<AnimalListPage> {
               // 普通の処理
               // クリックした時の処理
               // 以下追加
-              List<String> animal = animals[index];
+              Map<String,dynamic> animal = animals[index];
               return _buildAnimalColum(animal,context);
             })
     );
@@ -159,8 +159,8 @@ class AnimalDetailPage extends StatelessWidget {
   // final String animalCass;
   // final String animalLin;
   // final String animalLength;
-  final List<String> animal;
-  AnimalDetailPage(this.animal,);
+  final Map<String,dynamic> animal;
+   const AnimalDetailPage({Key? key,required this.animal}):super(key: key);
 
   // アイコン画像表示処理---------------------------ここから
   Widget IconBook(){
@@ -173,7 +173,7 @@ class AnimalDetailPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
             ),),
-          Text(animal[3]),
+          Text(animal['type']),
         ],
       );
   }
@@ -187,7 +187,7 @@ class AnimalDetailPage extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
           ),),
-        Text(animal[4]),
+        Text(animal['from']),
       ],
     );
   }
@@ -201,9 +201,10 @@ class AnimalDetailPage extends StatelessWidget {
         ),
         Text('全長',style: TextStyle(
           fontSize: 16,
+
         ),
         ),
-        Text(animal[5]),
+        Text(animal['height']),
       ],
     );
   }
@@ -213,7 +214,7 @@ class AnimalDetailPage extends StatelessWidget {
     return Scaffold(
       // bodyに対して背景色を指定する
       // backgroundColor: Colors.blue,
-      appBar: AppBar(title:  Text(animal[1]),),
+      appBar: AppBar(title:  Text(animal['name']),),
       // 二ページ目ボディー
       // カラムのsizeを超えたらスクロールできるようにする
       body:SingleChildScrollView(
@@ -222,7 +223,7 @@ class AnimalDetailPage extends StatelessWidget {
         Column(
           children: <Widget>[
             // 動物画像
-            Image.network(animal[0]),
+            Image.network(animal['image']),
             //   高さ
             Container(height: 20,),
             // タイトル
@@ -234,7 +235,7 @@ class AnimalDetailPage extends StatelessWidget {
               ),
             ),
             Container(height: 20,),
-            Text(animal[2],
+            Text(animal['info'],
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
