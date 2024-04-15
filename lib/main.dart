@@ -203,7 +203,11 @@ class AnimalDetailPage extends StatelessWidget {
                   fontWeight: FontWeight.bold
               ),
             ),
-            Text(animalInfo),
+            Text(animalInfo,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),),
             //   高さ
             Container(height: 20,),
             Row(
