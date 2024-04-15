@@ -204,6 +204,7 @@ class AnimalDetailPage extends StatelessWidget {
                   fontWeight: FontWeight.bold
               ),
             ),
+            Container(height: 20,),
             Text(animalInfo,
             style: TextStyle(
               fontWeight: FontWeight.bold,
