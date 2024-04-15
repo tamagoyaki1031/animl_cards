@@ -199,10 +199,12 @@ class AnimalDetailPage extends StatelessWidget {
             // タイトル
             Text('説明',
               style: TextStyle(
+                color: Colors.red,
                 //   text太文字
                   fontWeight: FontWeight.bold
               ),
             ),
+            Container(height: 20,),
             Text(animalInfo,
             style: TextStyle(
               fontWeight: FontWeight.bold,
